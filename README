@@ -18,3 +18,10 @@ Example: perl make-fmv-patch.pl <buildlog> <sourcecode>
     sourcecode: Absolute path to the source file from where patches will be
     generated
 
+------------
+Requirements
+------------
+- Exuberant ctags:
+    In order to use `make-fvm-patch.pl` your system will need Exuberant Ctags
+    (https://sourceforge.net/projects/ctags/), this is due to the `--c-kinds`
+    ctags' flag usage.
