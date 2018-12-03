@@ -96,7 +96,7 @@ foreach (keys %f) {
     my $fname = $_;
     my @flines = @{$f{$_}->{v_line}};
 
-    if ($fname =~ /(\.c$)/) {
+    if ($fname =~ /(\.c$)/ || $fname =~ /(\.cpp$)/) {
         my $f_path = &find_file($fname);
 
         my @keys = 0;

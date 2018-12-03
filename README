@@ -25,3 +25,20 @@ Requirements
     In order to use `make-fvm-patch.pl` your system will need Exuberant Ctags
     (https://sourceforge.net/projects/ctags/), this is due to the `--c-kinds`
     ctags' flag usage.
+
+------------
+Test examples
+------------
+```
+    cd tests
+    make
+    cd ..
+
+    perl make-fmv-patch.pl tests/max-build.log tests/
+    perl make-fmv-patch.pl tests/loop-build.log tests/
+
+    This will generate:
+
+    ./tests/max-test.cpp.patch
+    ./tests/loop-test.c.patch
+```
