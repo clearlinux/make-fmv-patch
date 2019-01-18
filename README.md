@@ -76,7 +76,7 @@ The command generates the following example.c.patch patch:
      {
          int i,x;
 ```
-### Apply the patch
+### 3. Apply the patch
 Using the example.c.patch file, apply the patch to example.c:
 
 ```patch -p1 < example.c.patch```
@@ -110,7 +110,7 @@ int main()
     return 0;
 }
 ```
-### Recompile the code
+### 4. Recompile the code
 
 Compile the code again (with FMV syntax having been applied to the code):
 
