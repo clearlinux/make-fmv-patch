@@ -154,6 +154,9 @@ then...
 * Recompile the code
 * Run
 
+## License
+
+This project is licensed under an MIT license. See the `LICENSE` file in this project.
 
 ## Further Reading
 * Clear Linux: [Use the function multi-version patch generator](https://clearlinux.org/documentation/clear-linux/tutorials/fmv)
