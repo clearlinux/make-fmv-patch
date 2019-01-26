@@ -76,6 +76,17 @@ The command generates the following example.c.patch patch:
      {
          int i,x;
 ```
+
+If you want to use a differnt target for your code you can create a file targets.conf
+
+For example
+
+```
+#if defined(i386__) || defined(__i386__) || defined(_M_IX86) || defined(_M_IX86) || defined(__X86__) || defined(_X86_) || defined(__I86__) || defined(__INTEL__) || defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64) || defined(_M_AMD64)
+        __attribute__((target_clones("avx2","arch=haswell","default")))
+#endif
+```
+
 ### 3. Apply the patch
 Using the example.c.patch file, apply the patch to example.c:
 
