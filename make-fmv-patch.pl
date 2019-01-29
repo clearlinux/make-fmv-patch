@@ -26,13 +26,27 @@
 
 # USAGE: perl fmvpatches.pl <path_to_logfile> <full_path_to_source_code>
 
-
 my %f;
 my $fmv = {};
 my ($log_file, $source_path) = @ARGV;
 
 sub patch_function {
-    my $avx2 = '__attribute__((target_clones("avx2","arch=atom","default")))'."\n";
+
+    my $attribute = "";
+    my $target_clones = 'targets.conf';
+
+    if (-e $target_clones) {
+        open(my $fh, '<:encoding(UTF-8)', $target_clones)
+            or die "Could not open file '$target_clones' $!";
+        while (my $row = <$fh>) {
+            chomp $row;
+            $attribute= $attribute.$row."\n";
+        }
+
+    }else {
+        $attribute = '__attribute__((target_clones("avx2","arch=atom","default")))'."\n";
+    }
+
     my ($file,@patch_line) = @_;
     my $patch_file = "$file"."~";
 
@@ -48,7 +62,7 @@ sub patch_function {
             last if $. == ($line_num - 1);
         }
 
-        print $out $avx2;
+        print $out $attribute;
     }
     while( <$in> ) {
         print $out $_;
