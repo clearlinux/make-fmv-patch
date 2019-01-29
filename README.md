@@ -77,7 +77,7 @@ The command generates the following example.c.patch patch:
          int i,x;
 ```
 
-If you want to use a differnt target for your code you can create a file targets.conf
+If you want to use a different target for your code you can create a file targets.conf
 
 For example
 
