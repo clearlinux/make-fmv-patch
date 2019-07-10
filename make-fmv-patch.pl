@@ -97,7 +97,7 @@ sub find_file {
 
 open(BUILD_LOG, '<', "$log_file") or die $!;
 while (<BUILD_LOG>) {
-    if($_ =~ /(\S+):([0-9]*):([0-9]*): note: (basic block|loop) (vectorized)/) {
+    if($_ =~ /(\S+):([0-9]*):([0-9]*): (optimized|note): (basic block|loop) (vectorized)/) {
 	$fmv->{s_name} = (split('/',$1))[-1];
 	$fmv->{f_name} = $1;
 	push @{$f{$1}->{v_line}},$2;
