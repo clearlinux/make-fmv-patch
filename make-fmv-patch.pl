@@ -24,7 +24,7 @@
 # This program will make its best effort on finding the candidates sources for FMV
 # patch them and create a bunch of ready to apply patches.
 
-# USAGE: perl fmvpatches.pl <path_to_logfile> <full_path_to_source_code>
+# USAGE: perl make-fmv-patch.pl <path_to_logfile> <full_path_to_source_code>
 
 my %f;
 my $fmv = {};
