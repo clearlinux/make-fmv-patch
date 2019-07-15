@@ -139,9 +139,9 @@ Voila!
 
 - GCC v6 compiler or newer
 - Perl
-- Exuberant ctags:
-    In order to use `make-fvm-patch.pl` your system will need Exuberant Ctags
-    (https://sourceforge.net/projects/ctags/), this is due to the `--c-kinds`
+- Universal Ctags:
+    In order to use `make-fvm-patch.pl` your system will need Universal Ctags
+    (https://ctags.io/), this is due to the `--c-kinds`
     ctags' flag usage.
 
 ## Test examples
