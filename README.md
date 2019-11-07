@@ -157,7 +157,13 @@ The repostory makes available a tests directory. Users can use the tests directo
 Once built, follow the steps outlined in the example above:
 
 ```bash
-    perl make-fmv-patch.pl tests/max-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cpp-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cxx-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cc-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-CPP-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-c++-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cp-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-C-build.log tests/
     perl make-fmv-patch.pl tests/loop-build.log tests/
 ```
 then...
