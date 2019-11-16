@@ -110,12 +110,12 @@ foreach (keys %f) {
     my $fname = $_;
     my @flines = @{$f{$_}->{v_line}};
 
-    if ($fname =~ /(\.c$)/ || $fname =~ /(\.cpp$)/) {
+    if ($fname =~ /(\.c$)/ || $fname =~ /(\.cpp$)|(\.cxx$)|(\.cc$)|(\.CPP$)|(\.c\+\+$)|(\.cp$)|(\.C)/) {
         my $f_path = &find_file($fname);
 
         my @keys = 0;
         my $i = 0;
-        foreach (`ctags --c-kinds=f -x $f_path`) {
+        foreach (`ctags --langmap=C++:.cpp.cxx.cc.CPP.c++.cp.C --c-kinds=f -x $f_path`) {
             chomp $_;
             $keys[$i++] = (split(/\s+/,$_))[2]; # get function number line
         }
