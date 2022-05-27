@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-
 # This program will make its best effort on finding the candidates sources for FMV
 # patch them and create a bunch of ready to apply patches.
 
@@ -32,39 +31,37 @@ my ($log_file, $source_path) = @ARGV;
 
 sub patch_function {
 
-    my $attribute = "";
+    my $attribute     = '__attribute__((target_clones(FMV_CLONE_TARGETS "default")))' . "\n";
+    my $head          = '#define FMV_CLONE_TARGETS "avx2","arch=atom",' . "\n";
     my $target_clones = 'targets.conf';
 
     if (-e $target_clones) {
-        open(my $fh, '<:encoding(UTF-8)', $target_clones)
-            or die "Could not open file '$target_clones' $!";
+        open(my $fh, '<:encoding(UTF-8)', $target_clones) or die "Could not open file '$target_clones' $!";
         while (my $row = <$fh>) {
             chomp $row;
-            $attribute= $attribute.$row."\n";
+            $head = $head . $row . "\n";
         }
-
-    }else {
-        $attribute = '__attribute__((target_clones("avx2","arch=atom","default")))'."\n";
     }
 
-    my ($file,@patch_line) = @_;
-    my $patch_file = "$file"."~";
+    my ($file, @patch_line) = @_;
+    my $patch_file = "$file" . "~";
 
     print "patching $file @ lines \(@patch_line\)\n";
     open(my $in, "<", $file) or die "$! - $file\n";
-    open(my $out, ">","$patch_file") or die __LINE__," - $!\n";
+    open(my $out, ">", "$patch_file") or die __LINE__, " - $!\n";
 
+    print $head;
     foreach (@patch_line) {
-        my $line_num =  $_;
+        my $line_num = $_;
 
-        while( <$in> ) {
+        while (<$in>) {
             print $out $_;
             last if $. == ($line_num - 1);
         }
 
         print $out $attribute;
     }
-    while( <$in> ) {
+    while (<$in>) {
         print $out $_;
     }
 
@@ -72,11 +69,12 @@ sub patch_function {
     close $in;
 
     my $diff = `diff -su $file $patch_file`;
-    open (my $d,">","$file.patch") or die __LINE__," - $!\n";
+    open(my $d, ">", "$file.patch") or die __LINE__, " - $!\n";
     print $d $diff;
     close($d);
     `rm $patch_file`;
 }
+
 sub find_file {
     my ($file) = @_;
 
