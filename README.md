@@ -141,15 +141,19 @@ Voila!
 The repostory makes available a tests directory. Users can use the tests directory to conduct their own tests and/or share issues with sample code (for easy reproducability).
 
 ```bash
-    cd tests
-    make
-    cd ..
+    make -C tests
 ```
 
 Once built, follow the steps outlined in the example above:
 
 ```bash
-    perl make-fmv-patch.pl tests/max-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cpp-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cxx-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cc-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-CPP-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-c++-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-cp-build.log tests/
+    perl make-fmv-patch.pl tests/max-test-C-build.log tests/
     perl make-fmv-patch.pl tests/loop-build.log tests/
 ```
 then...
@@ -157,6 +161,14 @@ then...
 * Recompile the code
 * Run
 
+Or alternatively to test everything at once execute
+```bash
+    make -C tests && \
+    for log in tests/*-build.log; do perl make-fmv-patch.pl "$log"; done && \
+    for patch in tests/*.patch; do patch "${patch%.*}" "$patch"; done && \
+    make -C tests && \
+    for exec in $(find tests -executable \! -type d); do "$exec"; done
+```
 ## License
 
 This project is licensed under an MIT license. See the `LICENSE` file in this project.
